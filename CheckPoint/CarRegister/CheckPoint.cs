@@ -23,7 +23,9 @@ namespace CheckPointProject.CarRegister
             OnVehiclePass.Invoke(this, new VehicleEventArgs(vehicle));
             
             ++vehiclesCount;
-            vehicleSpeedsSum += vehicle.GetSpeed();
+
+			var speed = vehicle.GetSpeed();
+            vehicleSpeedsSum += speed;
 
             _statistics.AverageSpeed = (int) (vehicleSpeedsSum / vehiclesCount);
 
@@ -40,7 +42,7 @@ namespace CheckPointProject.CarRegister
                 _statistics.TrucksCount++;
             }
 
-            if (vehicle.GetSpeed() > maxPossibleSpeed)
+            if (speed > maxPossibleSpeed)
             {
                 OnVehicleSpeeding.Invoke(this, new VehicleEventArgs(vehicle));
                 _statistics.SpeedLimitBreakersCount++;
