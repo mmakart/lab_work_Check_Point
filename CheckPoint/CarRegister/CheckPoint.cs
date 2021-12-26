@@ -7,9 +7,9 @@ namespace CheckPointProject.CarRegister
 {
     public class CheckPoint
     {
-        public const int maxPossibleSpeed = 110;
-        private long vehiclesCount = 0;
-        private double vehicleSpeedsSum = 0;
+        public const int maxAllowedSpeed = 110;
+        private long _vehiclesCount = 0;
+        private double _vehicleSpeedsSum = 0;
 
         private CheckPointStatistics _statistics = new CheckPointStatistics();
         private List<string> _stolenNumbers = new List<string> {
@@ -22,12 +22,12 @@ namespace CheckPointProject.CarRegister
             // Always
             OnVehiclePass.Invoke(this, new VehicleEventArgs(vehicle));
 
-            ++vehiclesCount;
+            ++_vehiclesCount;
 
             var speed = vehicle.GetSpeed();
-            vehicleSpeedsSum += speed;
+            _vehicleSpeedsSum += speed;
 
-            _statistics.AverageSpeed = (int) (vehicleSpeedsSum / vehiclesCount);
+            _statistics.AverageSpeed = (int) (_vehicleSpeedsSum / _vehiclesCount);
 
             if (vehicle is Car)
             {
@@ -42,7 +42,7 @@ namespace CheckPointProject.CarRegister
                 _statistics.TrucksCount++;
             }
 
-            if (speed > maxPossibleSpeed)
+            if (speed > maxAllowedSpeed)
             {
                 OnVehicleSpeeding.Invoke(this, new VehicleEventArgs(vehicle));
                 _statistics.SpeedLimitBreakersCount++;
