@@ -10,7 +10,7 @@ namespace CheckPointProject.Vehicle
 
         public static AVehicle GetRandomVehicle()
         {
-            var totalVehicleClasses = _random.Next(_vehicleClassCount);
+            var vehicleClassNumber = _random.Next(_vehicleClassCount);
 
             var totalColors = Enum.GetNames(typeof(VehicleColor)).Length;
             var totalBodyTypes = Enum.GetNames(typeof(VehicleBodyType)).Length;
@@ -20,7 +20,7 @@ namespace CheckPointProject.Vehicle
             var licenseNumber = _random.Next(100);
             var hasPassenger = (_random.Next(2) == 1 ? true : false);
 
-            switch (totalVehicleClasses)
+            switch (vehicleClassNumber)
             {
                 case 0:
                     return new Car(color, bodyType, licenseNumber, hasPassenger);
