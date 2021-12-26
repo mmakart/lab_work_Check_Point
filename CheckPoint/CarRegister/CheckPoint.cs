@@ -16,15 +16,15 @@ namespace CheckPointProject.CarRegister
             "10", "20", "30", "40", "50", "60", "70", "80", "90" };
 
         public CheckPointStatistics GetStatistics() => _statistics;
-        
+
         public void RegisterCar(AVehicle vehicle)
         {
             // Always
             OnVehiclePass.Invoke(this, new VehicleEventArgs(vehicle));
-            
+
             ++vehiclesCount;
 
-			var speed = vehicle.GetSpeed();
+            var speed = vehicle.GetSpeed();
             vehicleSpeedsSum += speed;
 
             _statistics.AverageSpeed = (int) (vehicleSpeedsSum / vehiclesCount);
